@@ -1,5 +1,7 @@
 buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240117225219-a9940c43223e.1 h1:6Y6LLHjUJsLAS01ZOZ/imBOXIek4ebWhZwadIx6el5I=
 buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240117225219-a9940c43223e.1/go.mod h1:6znL4Am/mtSqEWteEmKgLpgDI0t/Wx80bzMsTKlu2oA=
+buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240120102703-ad0e0726ffe6.1 h1:RQDFAqpqr6aq5M/RIELwo0COODTaLypcjjda3YCADZg=
+buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240120102703-ad0e0726ffe6.1/go.mod h1:6znL4Am/mtSqEWteEmKgLpgDI0t/Wx80bzMsTKlu2oA=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/charmbracelet/lipgloss v0.9.1 h1:PNyd3jvaJbg4jRHKWXnCj1akQm4rh8dbEzN1p/u1KWg=
@@ -9,6 +11,8 @@ github.com/charmbracelet/log v0.3.1/go.mod h1:OR4E1hutLsax3ZKpXbgUqPtTjQfrh1pG3z
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/crypto-smoke/meshtastic-go v0.0.0-20240119205152-70bb2c77356d h1:x7kE5gUyCPXPCV8Hqe3A/7ydQ7QHD4m+gew+hKaEbgk=
 github.com/crypto-smoke/meshtastic-go v0.0.0-20240119205152-70bb2c77356d/go.mod h1:46Kbmav7W2J68qRG4PnpnOZAgMuHtRPpItd+8Kvzvf8=
+github.com/crypto-smoke/meshtastic-go v0.0.0-20240123015616-5fa965d66db2 h1:QJTCuS8oVAbhjR7SQeUPNc7HRQ6qI1ld4on1B5UwrjI=
+github.com/crypto-smoke/meshtastic-go v0.0.0-20240123015616-5fa965d66db2/go.mod h1:46Kbmav7W2J68qRG4PnpnOZAgMuHtRPpItd+8Kvzvf8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
