@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -29,9 +26,18 @@ type thing struct {
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "meshtastic-client-proxy",
-	Short: "A meshtastic client proxy implementation that works via serial",
-	Long: `A proxy for communicating with a meshtastic node via serial and 
-forwarding packets to and from an MQTT broker`,
+	Short: "A meshtastic mqtt client proxy via serial/USB",
+	Long: `This will allow a USB or serial connected meshtastic node
+to connect to MQTT via the host device's internet connection. 
+
+NOTE: You must do the following in your device settings:
+  1. Enable MQTT software module
+  2. Enable MQTT client proxy
+  3. Enable uplink and/or downlink on each channel you want to proxy
+
+IMPORTANT: Currently this proxy ignores your device settings, so you
+           must still specify the channels you want to proxy and the
+           connection details for the MQTT broker.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
@@ -39,18 +45,20 @@ forwarding packets to and from an MQTT broker`,
 		t := thing{}
 		//log.SetLevel(log.DebugLevel)
 
-		chans, _ := cmd.Flags().GetStringArray("channels")
+		chans, _ := cmd.Flags().GetStringArray("channel")
 		brokerURL, _ := cmd.Flags().GetString("broker-url")
 		brokerUser, _ := cmd.Flags().GetString("user")
 		brokerPass, _ := cmd.Flags().GetString("pass")
 		rootTopic, _ := cmd.Flags().GetString("root")
+		comPort, _ := cmd.Flags().GetString("port")
 
 		client := mqtt.NewClient(brokerURL, brokerUser, brokerPass, rootTopic)
 		err := t.ConnectMQTT(client, chans)
 		if err != nil {
 			log.Fatal("error connecting to mqtt broker", "err", err)
 		}
-		err = t.ConnectSerial("COM20", true)
+
+		err = t.ConnectSerial(comPort, false)
 		if err != nil {
 			log.Fatal("error connecting to serial node", "err", err)
 		}
@@ -80,12 +88,17 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().StringP("broker-url", "b", "tcp://mqtt.meshtastic.org:1883", "MQTT broker URL")
-	rootCmd.Flags().StringP("user", "u", "meshdev", "MQTT username")
-	rootCmd.Flags().StringP("pass", "p", "large4cats", "MQTT user password")
-	rootCmd.Flags().StringP("root", "r", "msh/2", "MQTT root topic")
+	rootCmd.Flags().StringP("port", "p", "", "Serial port for node")
 
-	rootCmd.Flags().StringArray("channels", []string{"unknown"}, "Channels to proxy")
+	rootCmd.Flags().String("broker-url", "tcp://mqtt.meshtastic.org:1883", "MQTT broker URL")
+	rootCmd.Flags().String("user", "meshdev", "MQTT username")
+	rootCmd.Flags().String("pass", "large4cats", "MQTT user password")
+	rootCmd.Flags().StringP("root", "r", "msh", "MQTT root topic")
+
+	rootCmd.Flags().StringArrayP("channel", "c", []string{"LongFast"}, "Channel(s) to proxy")
+
+	cobra.MarkFlagRequired(rootCmd.Flags(), "port")
+	cobra.MarkFlagRequired(rootCmd.Flags(), "channels")
 
 }
 
