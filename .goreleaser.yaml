@@ -1,4 +1,11 @@
 builds:
+  - id: windows-amd64
+    main: ./
+    binary: golang-cross
+    goos:
+      - windows
+    goarch:
+      - amd64
   - id: darwin-amd64
     main: ./
     binary: golang-cross
@@ -40,7 +47,7 @@ archives:
     builds:
       - darwin-amd64
       - linux-armhf
-      - windows_amd64_v1
+      - windows-amd64
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format: zip
     wrap_in_directory: true
