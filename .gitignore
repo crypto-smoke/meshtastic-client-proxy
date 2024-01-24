@@ -1,1 +1,7 @@
 go.work*
+
+# for goreleaser
+*.tar.xz
+dist
+vendor
+.release-env
