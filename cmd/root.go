@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	generated "buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go/meshtastic"
+	pb "buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go/meshtastic"
 	"encoding/hex"
 	"errors"
 	"fmt"
@@ -152,10 +152,10 @@ func (t *thing) ConnectSerial(comport string, errorOnNoHandler bool) error {
 	// TODO: I still dont like this method of registering handlers, but it's close and "good enough" for now
 	// I would like to mirror how discordgo does it https://github.com/bwmarrin/Discordgo
 
-	sConn.Handle(new(generated.FromRadio), func(msg proto.Message) {
-		pkt := msg.(*generated.FromRadio)
+	sConn.Handle(new(pb.FromRadio), func(msg proto.Message) {
+		pkt := msg.(*pb.FromRadio)
 		switch p := pkt.PayloadVariant.(type) {
-		case *generated.FromRadio_MqttClientProxyMessage:
+		case *pb.FromRadio_MqttClientProxyMessage:
 			// send to mqtt
 			proxyMessage := p.MqttClientProxyMessage
 			log.Info("mesh to mqtt", "topic", proxyMessage.Topic, "payload", hex.EncodeToString(proxyMessage.GetData()))
@@ -195,7 +195,7 @@ func (t *thing) ConnectMQTT(client *mqtt.Client, channels []string) error {
 
 func (t *thing) channelHandler(channel string) mqtt.HandlerFunc {
 	return func(m mqtt.Message) {
-		var env generated.ServiceEnvelope
+		var env pb.ServiceEnvelope
 		err := proto.Unmarshal(m.Payload, &env)
 		if err != nil {
 			log.Error("failed unmarshalling to service envelope", "err", err, "payload", hex.EncodeToString(m.Payload))
@@ -204,11 +204,11 @@ func (t *thing) channelHandler(channel string) mqtt.HandlerFunc {
 
 		log.Info("got packet from mqtt", "topic", m.Topic, "channel", channel)
 
-		toRadio := generated.ToRadio{
-			PayloadVariant: &generated.ToRadio_MqttClientProxyMessage{
-				MqttClientProxyMessage: &generated.MqttClientProxyMessage{
+		toRadio := pb.ToRadio{
+			PayloadVariant: &pb.ToRadio_MqttClientProxyMessage{
+				MqttClientProxyMessage: &pb.MqttClientProxyMessage{
 					Topic:          m.Topic,
-					PayloadVariant: &generated.MqttClientProxyMessage_Data{Data: m.Payload},
+					PayloadVariant: &pb.MqttClientProxyMessage_Data{Data: m.Payload},
 					Retained:       m.Retained,
 				},
 			},
