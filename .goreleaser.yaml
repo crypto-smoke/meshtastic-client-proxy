@@ -53,11 +53,12 @@ checksum:
 snapshot:
   name_template: "{{ .Tag }}"
 changelog:
+  use: github
   sort: asc
-  filters:
-    exclude:
-      - '^docs:'
-      - '^test:'
+ # filters:
+ #   exclude:
+  #    - '^docs:'
+  #    - '^test:'
 
 release:
   github:
