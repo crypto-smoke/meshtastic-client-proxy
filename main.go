@@ -5,6 +5,12 @@ package main
 
 import "github.com/crypto-smoke/meshtastic-client-proxy/cmd"
 
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 func main() {
-	cmd.Execute()
+	cmd.Execute(version, commit, date)
 }
