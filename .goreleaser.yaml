@@ -53,7 +53,7 @@ checksum:
 snapshot:
   name_template: "{{ .Tag }}"
 changelog:
-  use: github
+  use: git
   sort: asc
  # filters:
  #   exclude:
