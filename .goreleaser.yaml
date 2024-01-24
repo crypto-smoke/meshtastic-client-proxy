@@ -1,14 +1,12 @@
 builds:
   - id: windows-amd64
     main: ./
-    binary: golang-cross
     goos:
       - windows
     goarch:
       - amd64
   - id: darwin-amd64
     main: ./
-    binary: golang-cross
     goos:
       - darwin
     goarch:
@@ -24,7 +22,6 @@ builds:
       - -s -w -X main.version={{.Version}}
   - id: linux-armhf
     main: ./
-    binary: golang-cross
     goos:
       - linux
     goarch:
@@ -49,7 +46,7 @@ archives:
       - linux-armhf
       - windows-amd64
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    format: zip
+    format: binary
     wrap_in_directory: true
 checksum:
   name_template: 'checksums.txt'
