@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"fmt"
-
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
+	"runtime/debug"
 )
 
 // versionCmd represents the version command
@@ -16,7 +17,17 @@ var versionCmd = &cobra.Command{
 			fmt.Printf("%s %s %s", version, commit, date)
 			return
 		}
+		if v, _ := cmd.Flags().GetBool("debug"); v {
+			dbg, ok := debug.ReadBuildInfo()
+			if !ok {
+				log.Error("failed getting debug build info")
+				return
+			}
+			fmt.Println(dbg.String())
+			return
+		}
 		fmt.Printf("%s", version)
+
 	},
 }
 
@@ -28,6 +39,7 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	versionCmd.PersistentFlags().BoolP("verbose", "v", false, "print additional version information")
+	versionCmd.PersistentFlags().BoolP("debug", "d", false, "print go build debug information")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
