@@ -3,7 +3,7 @@
 ### About
 This program lets you connect a [Meshtastic](https://meshtastic.org/) node 
 to your system via a USB or serial cable and use your devices internet 
-connection to connect the node to MQTT. 
+connection to connect the node to MQTT.
 
 ### IMPORTANT
 This project is under heavy development. While it currently works, and 
