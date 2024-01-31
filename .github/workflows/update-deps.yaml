@@ -50,13 +50,11 @@ jobs:
             to all previous majors, but in practice they are often not, so it's
             worthwhile to occasionally look for new majors and integrate them.
           branch: "feature/dep-update"
-          commit-message: |
+          commit-message:
             Update package dependencies + tidy
 
             Weekly update to the project's package dependencies initiated by an
             automatic GitHub Action running on cron. Keeps upgrades less of a
             monolithic task and lets security-related patches trickle in more
             quickly.
-          author: "Bot <bot@bot.bot>"
-          committer: "Bot <bot@bot.bot>"
           delete-branch: true
