@@ -3,7 +3,7 @@ module github.com/crypto-smoke/meshtastic-client-proxy
 go 1.21
 
 require (
-	buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240131022915-0e9967d809e7.1
+	buf.build/gen/go/meshtastic/protobufs/protocolbuffers/go v1.32.0-20240131194456-1cf305ba59b8.1
 	github.com/charmbracelet/log v0.3.1
 	github.com/crypto-smoke/meshtastic-go v0.1.4
 	github.com/spf13/cobra v1.8.0
